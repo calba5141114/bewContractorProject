@@ -5,8 +5,8 @@ const DefaultRouter = express.Router();
 /**
  * index.js main route.
  */
-DefaultRouter.get('/',(req,res)=>{
-    res.send({mesg: "hello world"});
+DefaultRouter.get('/', (req, res) => {
+    res.send({ mesg: "hello world" });
 });
 
 

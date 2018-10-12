@@ -3,12 +3,15 @@ const app = express();
 const mongoose = require('mongoose');
 const config = require('./config.js');
 const pug = require('pug');
-
+const path = require('path');
 /**
  * configurations for the app
  */
-app.set('views', __dirname + '/views');
-app.set('view engine', pug)
+app.set('views', path.join(__dirname, "views"));
+app.set('view engine', "pug")
+
+// scss styling and js code.
+app.use(express.static(path.join(__dirname, "public")))
 
 /**
  * Importing modules containing my routes and controllers
@@ -28,5 +31,5 @@ catch (err) {
 }
 
 app.listen(config.port, () => {
-    console.log(`Applicstion running on ${config.port}`)
+    console.log(`Application running on ${config.port}`)
 });
