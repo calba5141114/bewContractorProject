@@ -2,7 +2,13 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 const config = require('./config.js');
-const nunjucks = require('nunjucks');
+const pug = require('pug');
+
+/**
+ * configurations for the app
+ */
+app.set('views', __dirname + '/views');
+app.set('view engine', pug)
 
 /**
  * Importing modules containing my routes and controllers
