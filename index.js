@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const config = require('./config.js');
 const pug = require('pug');
 const path = require('path');
+
 /**
  * configurations for the app
  */
