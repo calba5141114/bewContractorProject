@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const config = require('./config.js');
 
 try{
-    mongoose.connect(config.mongoDBURI);
+    mongoose.connect(config.mongoDBURI,{useNewUrlParser: true});
 }
 catch(err){
     throw err;
