@@ -6,13 +6,28 @@ html(lang="en")
         title Document
         link(rel="stylesheet", href="styling.css")
         link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous")
-    body
+    body(class="container")
 
     h1 Welcome to the Open Community Space For Posting Messages.
     p Feel free to post anything you want here.
+
+    if data 
+        - var values = data
+    else
+        h1 No data has been found!
+
+    ul
+        each val in values
+            li(class="card") 
+                div(class="card-header") #{val.tag}
+                div(class="card-body")  
+                    h2(class="card-title") #{val.title}
+                    p(class="card-text") #{val.content}
+                    small #{val.date_published}
+            
+
+    a(href="/notes/noteform" class="btn btn-dark") Make a note.
     
-    if data
-        h1 #{data}
 
     script(src="scripts.js")
     

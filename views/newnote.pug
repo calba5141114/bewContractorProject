@@ -10,8 +10,9 @@ html(lang="en")
 
     h1 Make a new note.
     form(method="POST" action="/notes/noteform/newnote" )
-        input( type="text"  value="none" name="title")
-        input( type="text" value="none" name="content" )
+        input( type="text"  name="title" placeholder="title")
+        input( type="text"  name="content"  placeholder="content")
+        input(type="text" name="tag" placeholder="tag")
         input(type="submit")
 
     
