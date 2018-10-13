@@ -6,9 +6,19 @@ html(lang="en")
         title Document
         link(rel="stylesheet", href="styling.css")
         link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous")
-    body(class="container")
-    
-    h1 #{data.title}
-    p #{data.content}
-    span(class="badge badge-info") 
-        tags #{data.tag}
+    body(class="container-fluid")
+
+    br 
+    a(href="/notes", class="btn btn-outline-dark btn-sm" ) Back
+        
+    div(class="container")
+        br
+        br
+        h4 #{data.title}
+        if data.image_url
+                img(src=data.image_url, alt="Image that failed to load", class="img-fluid rounded")
+        br
+        br
+        p #{data.content}
+        span(class="badge badge-dark") 
+            tags #{data.tag}

@@ -33,7 +33,8 @@ CommunityNotesRouter.post('/notes/noteform/newnote', (req, res) => {
     CommunityNoteModel.create({
         title: req.body.title,
         content: req.body.content,
-        tag: req.body.tag
+        tag: req.body.tag,
+        image_url: req.body.img_url
     }, (err, note) => {
         if (err) throw err;
         console.log(`${note} was saved`)
