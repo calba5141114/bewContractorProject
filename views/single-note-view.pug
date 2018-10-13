@@ -4,7 +4,6 @@ html(lang="en")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
         meta(http-equiv="X-UA-Compatible", content="ie=edge")
         title Document
-        link(rel="stylesheet", href="styling.css")
         link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous")
     body(class="container-fluid")
 
@@ -15,10 +14,19 @@ html(lang="en")
         br
         br
         h4 #{data.title}
-        if data.image_url
-                img(src=data.image_url, alt="Image that failed to load", class="img-fluid rounded")
+        img(src=data.image_url, alt="Image that failed to load", class="img-fluid rounded")
         br
         br
         p #{data.content}
         span(class="badge badge-dark") 
             tags #{data.tag}
+        br
+        br
+
+        h3 Comments
+        form(method="POST", action="/notes/comment", class="form")
+            input(type="hidden" name="post_id" value=data._id)
+            div(class="form-group")
+                textarea( class="form-control" type="text"  name="comment"  placeholder="Comment here")
+            div(class="form-group")  
+                input( class="btn btn-light float-right" type="submit")

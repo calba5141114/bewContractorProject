@@ -57,6 +57,10 @@ CommunityNotesRouter.get('/notes/note/:id', (req, res) => {
     });
 });
 
+CommunityNotesRouter.post('/notes/comment', (req, res) => {
+    res.redirect(`/notes/note/${req.body.post_id}`);
+    console.log(req.body);
+});
 
 
 module.exports = CommunityNotesRouter;
