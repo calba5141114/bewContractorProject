@@ -4,22 +4,24 @@ const mongoose = require('mongoose');
 const config = require('./config.js');
 const pug = require('pug');
 const path = require('path');
+const bodyParser = require('body-parser');
 
 // connecting to the DB before anything
-    mongoose.connect(config.mongoDBURI, { useNewUrlParser: true })
-    .then(()=>{
+mongoose.connect(config.mongoDBURI, { useNewUrlParser: true })
+    .then(() => {
         console.log(`Connected to ${config.mongoDBURI}`)
     })
-    .catch(err =>{
+    .catch(err => {
         console.log(err);
     })
-
 
 /**
  * configurations for the app
  */
 app.set('views', path.join(__dirname, "views"));
 app.set('view engine', "pug")
+app.use(bodyParser.urlencoded({ extended: false}));
+app.use(bodyParser.json());
 
 // scss styling and js code.
 app.use(express.static(path.join(__dirname, "public")))

@@ -9,7 +9,7 @@ html(lang="en")
     body
 
     h1 Make a new note.
-    form(action="/notes/noteform/newnote" method="post")
+    form(method="POST" action="/notes/noteform/newnote" )
         input( type="text"  value="none" name="title")
         input( type="text" value="none" name="content" )
         input(type="submit")
