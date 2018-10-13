@@ -5,6 +5,16 @@ const config = require('./config.js');
 const pug = require('pug');
 const path = require('path');
 
+// connecting to the DB before anything
+    mongoose.connect(config.mongoDBURI, { useNewUrlParser: true })
+    .then(()=>{
+        console.log(`Connected to ${config.mongoDBURI}`)
+    })
+    .catch(err =>{
+        console.log(err);
+    })
+
+
 /**
  * configurations for the app
  */
@@ -23,13 +33,6 @@ const CommunityNotesRouter = require('./controllers/CommunityNotesRouter.js');
 app.use('/', DefaultRouter);
 // notes router
 app.use('/', CommunityNotesRouter);
-
-try {
-    mongoose.connect(config.mongoDBURI, { useNewUrlParser: true });
-}
-catch (err) {
-    throw err;
-}
 
 app.listen(config.port, () => {
     console.log(`Application running on ${config.port}`)
