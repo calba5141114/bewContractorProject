@@ -8,8 +8,8 @@ html(lang="en")
         link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous")
     body(class="container")
 
-    h1 Welcome to the Open Community Space For Posting Messages.
-    p Feel free to post anything you want here.
+    h1(class="display-4") Open Community Space
+    p(class="text-muted") Feel free to post anything you want here.
 
     if data 
         - var values = data
@@ -18,6 +18,7 @@ html(lang="en")
 
     ul
         each val in values
+            br
             li(class="card") 
                 div(class="card-header") #{val.tag}
                 div(class="card-body")  
@@ -26,7 +27,7 @@ html(lang="en")
                     small #{val.date_published}
             
 
-    a(href="/notes/noteform" class="btn btn-dark") Make a note.
+    a(href="/notes/noteform" class="btn btn-dark float-right") Make a note.
     
 
     script(src="scripts.js")
