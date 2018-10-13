@@ -20,11 +20,14 @@ html(lang="en")
         each val in values
             br
             li(class="card") 
-                div(class="card-header") #{val.tag}
+                div(class="card-header") 
+                    span(class="badge badge-dark") #{val.tag}
                 div(class="card-body")  
                     h2(class="card-title") #{val.title}
                     p(class="card-text") #{val.content}
                     small #{val.date_published}
+                    br
+                    a(href="/notes/note/"+ val._id) more
             
 
     a(href="/notes/noteform" class="btn btn-dark float-right") Make a note.
