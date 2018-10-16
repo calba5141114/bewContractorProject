@@ -1,0 +1,17 @@
+
+Sample Post
+
+http://www.ricoh-imaging.co.jp/english/products/q-s1/ex/img/bod_mainImg_01.jpg
+
+Praesent venenatis sapien lacinia leo auctor tincidunt. 
+Suspendisse a erat id felis finibus imperdiet. Duis efficitur eros sed hendrerit gravida. 
+Proin lacinia varius mi at eleifend. Cras lacinia finibus arcu, eu accumsan orci dignissim eu. 
+Vestibulum quis tellus eget lacus lobortis iaculis nec aliquam sem. Mauris a lorem sapien. 
+Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. 
+Nulla at fringilla metus. Sed tempus ac nibh a lobortis. Curabitur eget nibh sit amet velit tristique tempus sit amet nec nunc. 
+Pellentesque ut pulvinar nisl. Fusce sit amet condimentum libero, 
+et tincidunt elit. Proin volutpat leo id metus sollicitudin, 
+ut tincidunt est elementum.
+ Proin eleifend elit eu ante sagittis ultrices.
+
+ #test

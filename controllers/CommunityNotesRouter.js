@@ -3,25 +3,38 @@ const CommunityNotesRouter = express.Router();
 const CommunityNoteModel = require('../models/CommunityNoteModel.js');
 const CommunityCommentModel = require('../models/CommunityCommentModel.js');
 
+
 /**
  * Returns a list of all the notes in the Database.
  */
 
 CommunityNotesRouter.get('/notes', (req, res) => {
 
-    CommunityNoteModel.find({}, (err, models) => {
-        if (err) throw err;
-        let data = models;
-        return res.render('index', { data: data });
-    });
+    try {
+        CommunityNoteModel.find({}, (err, models) => {
+            if (err) throw err;
+            let data = models;
+            return res.render('index', { data: data });
+        });
+    } catch (err) {
+        // sends the user a page indicating a server error has occured.
+        res.render('500');
+    }
 
-})
+});
 
 /**
  * A route leading to the new notes template/form
  */
 CommunityNotesRouter.get('/notes/noteform', (req, res) => {
-    return res.render('newnote');
+
+    try {
+        return res.render('newnote');
+    }
+    catch (err) {
+        return res.render('500')
+    }
+
 });
 
 
@@ -30,18 +43,23 @@ CommunityNotesRouter.get('/notes/noteform', (req, res) => {
  */
 CommunityNotesRouter.post('/notes/noteform/newnote', (req, res) => {
 
-    // saving community note model to the Databse and then notifying console upon success.
-    CommunityNoteModel.create({
-        title: req.body.title,
-        content: req.body.content,
-        tag: req.body.tag,
-        image_url: req.body.img_url
-    }, (err, note) => {
-        if (err) throw err;
-        console.log(`${note} was saved`)
-    });
-
-    return res.render('note', { note_title: req.body.title, note_content: req.body.content, note_tag: req.body.tag });
+    try {
+        // saving community note model to the Databse and then notifying console upon success.
+        CommunityNoteModel.create({
+            title: req.body.title,
+            content: req.body.content,
+            tag: req.body.tag,
+            image_url: req.body.img_url,
+        },
+            (err, note) => {
+                // if the note fails to save an error will be thrown 
+                if (err) throw err;
+                // redirecting the user via new route instead of another redundant template.
+                return res.redirect(`/notes/note/${note._id}`);
+            });
+    } catch (err) {
+        return res.redirect('/notes')
+    }
 
 });
 
@@ -52,9 +70,7 @@ CommunityNotesRouter.post('/notes/noteform/newnote', (req, res) => {
  */
 CommunityNotesRouter.get('/notes/note/:id', (req, res) => {
 
-
     try {
-
         // get post data
         CommunityNoteModel.findById(req.params.id, (err, model) => {
             if (err) console.log(err);
@@ -72,30 +88,35 @@ CommunityNotesRouter.get('/notes/note/:id', (req, res) => {
 
     }
     catch (err) {
-        res.redirect(`/notes/note/${req.params.id}`)
+        res.redirect(`/notes`)
     }
 
 });
 
 
 CommunityNotesRouter.post('/notes/comment', (req, res) => {
-    console.log(req.body);
+
     /**
      * creates a comment and assciates it with a parent post.
      */
 
-    if (req.body.comment) {
-        CommunityCommentModel.create({
-            content: req.body.comment,
-            parent_post: req.body.post_id,
-        }, (err, comment) => {
-            if (err) throw err;
+    try {
+        if (req.body.comment) {
+            CommunityCommentModel.create({
+                content: req.body.comment,
+                parent_post: req.body.post_id,
+            }, (err, comment) => {
+                if (err) throw err;
+                res.redirect(`/notes/note/${req.body.post_id}`);
+            });
+        } else {
             res.redirect(`/notes/note/${req.body.post_id}`);
-        });
+        }
+
+    } catch (err) {
+        res.render('500');
     }
-    else {
-        res.redirect(`/notes/note/${req.body.post_id}`);
-    }
+
 
 });
 

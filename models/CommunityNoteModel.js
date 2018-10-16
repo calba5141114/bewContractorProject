@@ -1,5 +1,12 @@
 const mongoose = require('mongoose');
-const CommunityCommentModel = require('./CommunityCommentModel.js');
+
+/**
+ * This Schema takes a title to  display to the end user
+ * content for the end user
+ * a single tag for use in allowing other users to get a grasp of the text content
+ * image_url is a hotlink to an image
+ * date_published is important to the end user.
+ */
 
 const CommunityNoteSchema = new mongoose.Schema({
     title: String,
@@ -8,10 +15,6 @@ const CommunityNoteSchema = new mongoose.Schema({
     image_url: {
         type: String,
         default: ""
-    },
-    comments: {
-        type: Array,
-        default: []
     },
     date_published: {
         type: Date,
@@ -22,3 +25,8 @@ const CommunityNoteSchema = new mongoose.Schema({
 const CommunityNoteModel = mongoose.model('CommunityNote', CommunityNoteSchema);
 
 module.exports = CommunityNoteModel;
+
+/**
+ * The Comment Model is located in models/CommunityCommentModel.js
+ * and has a field to associate with it's parent post Model.
+ */
