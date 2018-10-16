@@ -18,7 +18,7 @@ CommunityNotesRouter.get('/notes', (req, res) => {
         });
     } catch (err) {
         // sends the user a page indicating a server error has occured.
-        res.render('500');
+        res.render('error500');
     }
 
 });
@@ -32,7 +32,7 @@ CommunityNotesRouter.get('/notes/noteform', (req, res) => {
         return res.render('newnote');
     }
     catch (err) {
-        return res.render('500')
+        return res.render('error500')
     }
 
 });
@@ -114,7 +114,7 @@ CommunityNotesRouter.post('/notes/comment', (req, res) => {
         }
 
     } catch (err) {
-        res.render('500');
+        res.render('error500');
     }
 
 

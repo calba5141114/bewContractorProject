@@ -20,7 +20,7 @@ mongoose.connect(config.mongoDBURI, { useNewUrlParser: true })
  */
 app.set('views', path.join(__dirname, "views"));
 app.set('view engine', "pug")
-app.use(bodyParser.urlencoded({ extended: false}));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 // scss styling and js code.
@@ -35,6 +35,10 @@ const CommunityNotesRouter = require('./controllers/CommunityNotesRouter.js');
 app.use('/', DefaultRouter);
 // notes router
 app.use('/', CommunityNotesRouter);
+// 404 route
+app.get('*', (req, res) => {
+    res.render('error404');
+});
 
 app.listen(config.port, () => {
     console.log(`Application running on ${config.port}`)
