@@ -16,7 +16,7 @@ html(lang="en")
             h1 No data has been found!
 
         ul
-            each val in values
+            each val in data
                 br
                 li(class="card", style="width:50vw;") 
                     div(class="card-header") 
@@ -31,6 +31,8 @@ html(lang="en")
                 
         br
         a(href="/notes/noteform" class="btn btn-dark float-left") Make a note.
+
+         
     
 
         script(src="scripts.js")

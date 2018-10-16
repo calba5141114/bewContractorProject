@@ -1,6 +1,7 @@
 const express = require('express');
 const CommunityNotesRouter = express.Router();
 const CommunityNoteModel = require('../models/CommunityNoteModel.js');
+const CommunityCommentModel = require('../models/CommunityCommentModel.js');
 
 /**
  * Returns a list of all the notes in the Database.
@@ -44,22 +45,58 @@ CommunityNotesRouter.post('/notes/noteform/newnote', (req, res) => {
 
 });
 
+
+
 /**
  * Get request for a single note it should return all the data you need to work with everything
  */
 CommunityNotesRouter.get('/notes/note/:id', (req, res) => {
-    let id = req.params.id;
-    CommunityNoteModel.findById(id, (err, model) => {
-        if (err) console.log(err);
-        // passing model to PUG template.
-        let data = model;
-        res.render('single-note-view', { data });
-    });
+
+
+    try {
+
+        // get post data
+        CommunityNoteModel.findById(req.params.id, (err, model) => {
+            if (err) console.log(err);
+            return data = model;
+        });
+
+
+        // getting comments and sending them to the page
+        CommunityCommentModel.find({ parent_post: req.params.id }, (err, data) => {
+            if (err) throw err;
+            return comments = data;
+        });
+
+        return res.render('single-note-view', { data, comments });
+
+    }
+    catch (err) {
+        res.redirect(`/notes/note/${req.params.id}`)
+    }
+
 });
 
+
 CommunityNotesRouter.post('/notes/comment', (req, res) => {
-    res.redirect(`/notes/note/${req.body.post_id}`);
     console.log(req.body);
+    /**
+     * creates a comment and assciates it with a parent post.
+     */
+
+    if (req.body.comment) {
+        CommunityCommentModel.create({
+            content: req.body.comment,
+            parent_post: req.body.post_id,
+        }, (err, comment) => {
+            if (err) throw err;
+            res.redirect(`/notes/note/${req.body.post_id}`);
+        });
+    }
+    else {
+        res.redirect(`/notes/note/${req.body.post_id}`);
+    }
+
 });
 
 

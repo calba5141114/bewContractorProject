@@ -6,6 +6,10 @@ const CommunityCommentSchema = new mongoose.Schema({
     parent_post: {
         type: String,
         default: ""
+    },
+    date_published: {
+        type: Date,
+        default: Date.now
     }
 });
 
