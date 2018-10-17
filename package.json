@@ -4,6 +4,10 @@
   "main": "index.js",
   "repository": "https://github.com/calba5141114/bewContractorProject.git",
   "license": "MIT",
+	"scripts":{
+		"start": "node index.js"
+	}
+   ,
   "dependencies": {
     "body-parser": "^1.18.3",
     "chai": "^4.2.0",
